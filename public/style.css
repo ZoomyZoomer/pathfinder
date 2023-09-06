@@ -1,0 +1,210 @@
+html{
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    height: 100%;
+    font-family: Inter, sans-serif;
+}
+
+
+.nav--mainGrid{
+    display: grid;
+    grid-template-columns: 150px 1fr 150px;
+    height: 75px;
+    align-items: center;
+    background-color: #34495e;
+}
+
+.nav--leftFlex{
+    display: flex;
+}
+
+.nav--middleFlex{
+    display: flex;
+    justify-content: center;
+}
+
+.title{
+    font-weight: 700;
+    color: white;
+    font-size: 26px;
+    margin-left: 50px;
+}
+
+.visualizeButton {
+    font-family: Roboto, Arial;
+    font-size: 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #45eecc;
+    background-color: #34495e;
+    color: #45eecc;
+    padding: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 700;
+    position: relative;
+  
+  }
+  
+  .visualizeButton:hover {
+    background-color: #45eecc;
+    color: #34495e;
+    border-color: #34495e;
+    border-radius: 10px;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    background-position: center;
+    background-repeat: repeat;
+    animation-name: goal;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+    animation-name: visualizeButtonHover;
+  }
+  
+  @keyframes visualizeButtonHover {
+      50%{
+        transform: scale(1.4);
+      }
+      100% {
+        transform: scale(1.0);
+      }
+  }
+
+  .gridFlexBox{
+    display: flex;
+  }
+
+  .unvisited,
+  .blocked,
+  .visited {
+    flex: 1;
+    height: 22px;
+    background-color: white;
+    margin-left: -1px;
+    margin-bottom: -1px;
+    border: 1px solid rgb(209, 226, 240);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.blocked {
+    background-color: rgb(200, 216, 248);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: blocked;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+  }
+
+  @keyframes blocked {
+    0% {
+        transform: scale(.3);
+      }
+    
+      25% {
+        transform: scale(0.7);
+      }    
+      50%{
+        transform: scale(1.0);
+      }
+      75% {
+        transform: scale(1.4);
+      }
+      100% {
+        transform: scale(1.0);
+      }
+  }
+
+.gridGrid{
+    display:grid;
+    grid-template-columns: 1fr ;
+    margin-top: 175px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.imageNode{
+  height: 100%;
+  width: 100%;
+}
+
+.shortestPath {
+  flex: 1;
+  height: 22px;
+  background-color: white;
+  margin-left: -1px;
+  margin-bottom: -1px;
+  border: 1px solid rgb(209, 226, 240);
+  transition: background-color 0.3s;
+  z-index: 2000;
+  border-radius: 10%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: toShortestPath;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+
+
+@keyframes toShortestPath {
+    0% {
+        transform: scale(.3);
+        background-color: rgba(41, 4, 24, 0.75);
+        border-radius: 100%;
+      }
+    
+      50% {
+        background-color: rgba(97, 0, 20, 0.75);
+        border-radius: 50%;
+      }
+    
+      75% {
+        transform: scale(2);
+        background-color: rgba(216, 5, 141, 0.75);
+        border-radius: 25%;
+      }
+    
+      100% {
+        transform: scale(1.0);
+        background-color: rgba(170, 67, 255, 0.75);
+      }
+    }
+
+ .shortestPathStatic{
+    flex: 1;
+    height: 22px;
+    background-color: rgba(178, 67, 255, 0.75);
+    margin-left: -1px;
+    margin-bottom: -1px;
+    border: 1px solid rgb(175, 216, 248);
+    transition: background-color 0.3s;
+    border-radius: 10%;
+    z-index: 4000;
+  }
