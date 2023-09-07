@@ -16,7 +16,9 @@ const Navbar = () => {
   const algoDrop = (e) => {
     if (!algoIsActive){
       e.target.classList.add('dropdownActive');
-      document.getElementById('algoOptionsWrapper').classList.add('notInvisible');
+      var element = document.getElementById('algoOptionsWrapper');
+      element.classList.add('notInvisible');
+      element.classList.add('pointerEvent');
     } else {
       e.target.classList.remove('dropdownActive');
       document.getElementById('algoOptionsWrapper').classList.remove('notInvisible');
@@ -44,14 +46,33 @@ const Navbar = () => {
                   <button id="AStar" className="algoOptions" onClick={handleChange}> AStar </button>
                 </div>
              </div>
-                <button className="visualizeButton" onClick={algoValue === 'Breadth First Search' ? BFS : 
+              <div className='visualizeButtonHolder'>
+              <button className="visualizeButton" onClick={algoValue === 'Breadth First Search' ? BFS : 
                 algoValue === 'AStar' ? AStar :
                  DFS
                 }>Pathfind With {algoValue} {algoValue === '' ? '...' : '!' }</button>
+              </div>
             </section>
         </nav>
+        <div className='clearFlex'>
+          <button id='clear' className="clearButton">Clear</button>
+        </div>
+        
     </div>
   )
 }
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+
+
+
+
