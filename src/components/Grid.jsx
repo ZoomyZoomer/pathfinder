@@ -13,6 +13,7 @@ var endClicked = false;
 var isAnimated = true;
 let shortestPath = [];
 let visitedNodes = [];
+let blockedNodes = [];
 
 
 
@@ -57,14 +58,19 @@ const makeGrid = () => {
   }
 
   const setBlocked = (e) => {
-    if (!(e.target.classList.contains("imageNode")) && !(e.target.classList.contains('visitedNoAnimation'))) e.target.classList.add("blocked");
+    if (!(e.target.classList.contains("imageNode")) && !(e.target.classList.contains('visitedNoAnimation'))) {
+      e.target.classList.add("blocked");
+      blockedNodes.push(e.target);
+    }
+      
   }
 
-  const clearTiles = () => {
+  const clearTiles = (buttonClicked) => {
     shortestPath.map(element =>{ 
         element.classList.remove('shortestPathStatic');
         element.classList.remove('endNode');
         element.classList.remove('visitedNoAnimation');
+        element.classList.remove('goal');
         element.classList.add('unvisited')
     });
 
@@ -74,6 +80,15 @@ const makeGrid = () => {
         element.classList.add('unvisited');
     });
 
+    blockedNodes.map(element =>{
+      element.classList.remove('blocked');
+      element.classList.add('unvisited');
+    })
+
+    if (buttonClicked) {
+      isAnimated = true;
+      document.getElementById('clear').classList.remove('pointerEventReset');
+    }
     
   }
 
@@ -86,7 +101,7 @@ const makeGrid = () => {
           e.target.appendChild(document.getElementById("startNode"));
           startNode = e.target.id;
           if (!isAnimated){
-            clearTiles();
+            clearTiles(false);
             BFS();
             return;
           }
@@ -95,7 +110,7 @@ const makeGrid = () => {
           e.target.appendChild(document.getElementById("endNode"));
           endNode = e.target.id;
           if (!isAnimated){
-            clearTiles();
+            clearTiles(false);
             BFS();
             return;
           }
@@ -303,10 +318,13 @@ const makeGrid = () => {
   
           elem.classList.remove('visited');
 
+
           if (i === path.length -1) {
+          if (isAnimated){
             document.getElementById(endNode).classList.add('endNode');
             document.getElementById(endNode).classList.add('goal');
             await sleep(200);
+          }
           }
           
   
@@ -318,6 +336,8 @@ const makeGrid = () => {
       }
   
       document.getElementById(startNode).classList.remove('undraggable');
+      document.getElementById('clear').classList.add('notInvisible');
+      document.getElementById('clear').classList.add('pointerEventReset');
       isAnimated = false;
     }
 
@@ -334,5 +354,6 @@ export{
     Grid,
     BFS,
     AStar,
-    DFS
+    DFS,
+    clearTiles
 };

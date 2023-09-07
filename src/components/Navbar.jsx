@@ -1,5 +1,5 @@
 import React from 'react'
-import {BFS, AStar, DFS} from './Grid'
+import {BFS, AStar, DFS, clearTiles} from './Grid'
 
 const Navbar = () => {
 
@@ -55,7 +55,7 @@ const Navbar = () => {
             </section>
         </nav>
         <div className='clearFlex'>
-          <button id='clear' className="clearButton">Clear</button>
+          <button id='clear' className="clearButton" onClick={() => clearTiles(true)}>Clear</button>
         </div>
         
     </div>

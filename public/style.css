@@ -344,11 +344,23 @@ animation-play-state: running;
   border-style: solid;
   border-radius: 5px;
   pointer-events: none;
+  opacity: 0;
+}
+
+.clearButton:active {
+  background-color: rgb(192, 192, 192);
+  color: white;
 }
 
 .pointerEvent {
   pointer-events: all;
   cursor: pointer;
+}
+
+.pointerEventReset{
+  pointer-events: all;
+  cursor: pointer;
+  opacity: 1;
 }
 
 .clearFlex {
