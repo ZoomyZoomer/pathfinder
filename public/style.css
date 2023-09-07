@@ -351,7 +351,38 @@ animation-play-state: running;
   margin-top: 20px;
 }
 
+.goal {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: goal;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
 
+@keyframes goal {
+  0% {
+      transform: scale(.3);
+    }
+  
+    25% {
+      transform: scale(0.7);
+    }    
+    50%{
+      transform: scale(1.0);
+    }
+    75% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1.0);
+    }
+}
 
 
 

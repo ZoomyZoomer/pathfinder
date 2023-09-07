@@ -299,6 +299,8 @@ const makeGrid = () => {
           }
   
           elem.classList.remove('visited');
+
+          if (i === path.length -1) elem.classList.add('goal');
   
       }
   
