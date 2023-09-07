@@ -363,21 +363,22 @@ animation-play-state: running;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-play-state: running;
+  z-index: 4000;
 }
 
 @keyframes goal {
   0% {
-      transform: scale(.3);
+      transform: scale(.7);
     }
   
     25% {
-      transform: scale(0.7);
+      transform: scale(1.7);
     }    
     50%{
-      transform: scale(1.0);
+      transform: scale(2.0);
     }
     75% {
-      transform: scale(1.4);
+      transform: scale(2.4);
     }
     100% {
       transform: scale(1.0);

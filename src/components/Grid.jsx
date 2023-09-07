@@ -263,6 +263,9 @@ const makeGrid = () => {
   
           if (isAnimated){
             elem.classList.add('shortestPath');
+            var audio = new Audio('bubble.wav');
+                audio.play();  
+            await sleep(500);
           } else {
             elem.classList.add('shortestPathStatic');
           }
@@ -300,7 +303,12 @@ const makeGrid = () => {
   
           elem.classList.remove('visited');
 
-          if (i === path.length -1) elem.classList.add('goal');
+          if (i === path.length -1) {
+            document.getElementById(endNode).classList.add('endNode');
+            document.getElementById(endNode).classList.add('goal');
+            await sleep(200);
+          }
+          
   
       }
   
