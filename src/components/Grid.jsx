@@ -288,6 +288,15 @@ const makeGrid = () => {
   
           if (isAnimated){
             elem.classList.add('shortestPath');
+            if (i != path.length - 1){
+              var audio = new Audio('bubble.wav');
+                audio.volume = 0.05;
+                audio.play();
+            } else {
+              var audio = new Audio('bubblefinal.wav');
+                audio.volume = 0.05;
+                audio.play();
+            }
             await sleep(250);
           } else {
             elem.classList.add('shortestPathStatic');
