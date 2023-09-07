@@ -57,18 +57,20 @@ const makeGrid = () => {
   }
 
   const setBlocked = (e) => {
-    if (!(e.target.classList.contains("imageNode"))) e.target.classList.add("blocked");
+    if (!(e.target.classList.contains("imageNode")) && !(e.target.classList.contains('visitedNoAnimation'))) e.target.classList.add("blocked");
   }
 
   const clearTiles = () => {
     shortestPath.map(element =>{ 
         element.classList.remove('shortestPathStatic');
         element.classList.remove('endNode');
+        element.classList.remove('visitedNoAnimation');
         element.classList.add('unvisited')
     });
 
     visitedNodes.map(element => {
         element.classList.remove('visited');
+        element.classList.remove('visitedNoAnimation');
         element.classList.add('unvisited');
     });
 
@@ -76,6 +78,7 @@ const makeGrid = () => {
   }
 
   const dragImage = (e) => {
+    console.log('running');
     if (!document.getElementById(startNode).classList.contains('undraggable')){
         var element = e.target.classList;
       if (!(element.contains("imageNode")) && !(element.contains("blocked"))){
@@ -85,6 +88,7 @@ const makeGrid = () => {
           if (!isAnimated){
             clearTiles();
             BFS();
+            return;
           }
 
         } else if (endClicked){
@@ -93,6 +97,7 @@ const makeGrid = () => {
           if (!isAnimated){
             clearTiles();
             BFS();
+            return;
           }
         }
 
@@ -101,11 +106,12 @@ const makeGrid = () => {
     
   }
 
-  function BFS(){
+  async function BFS(){
     console.log('u');
 
     shortestPath = [];
     visitedNodes = [];
+    queue = [];
   
     document.getElementById(startNode).classList.add('undraggable');
   
@@ -123,6 +129,7 @@ const makeGrid = () => {
   
       var elem = document.getElementById(startNode);
       elem.classList.remove('unvisited');
+      isAnimated ? elem.classList.add('visited') : elem.classList.add('visitedNoAnimation');
   
       var queue = [];
       queue.push(Node);
@@ -137,6 +144,9 @@ const makeGrid = () => {
           document.getElementById('startNode').classList.remove('undraggable');
           return newNode.path;
         } else if (newNode.status === 'valid'){
+          if (isAnimated){
+            await sleep(20);
+          }
           queue.push(newNode);
         }
   
@@ -146,6 +156,9 @@ const makeGrid = () => {
           document.getElementById('startNode').classList.remove('undraggable');
           return newNode.path;
         } else if (newNode.status === 'valid'){
+          if (isAnimated){
+            await sleep(20);
+          }
           queue.push(newNode);
         }
   
@@ -155,6 +168,9 @@ const makeGrid = () => {
           document.getElementById('startNode').classList.remove('undraggable');
           return newNode.path;
         } else if (newNode.status === 'valid'){
+          if (isAnimated){
+            await sleep(20);
+          }
           queue.push(newNode);
         }
   
@@ -164,6 +180,9 @@ const makeGrid = () => {
           document.getElementById('startNode').classList.remove('undraggable');
           return newNode.path;
         } else if (newNode.status === 'valid'){
+          if (isAnimated){
+            await sleep(20);
+          }
           queue.push(newNode);
         }
   
@@ -217,13 +236,13 @@ const makeGrid = () => {
     } else if (elem.classList.contains('visited')){
         return 'visited';
     } else if (elem.classList.contains('unvisited')){    
-        elem.classList.add('visited');
+        isAnimated ? elem.classList.add('visited') : elem.classList.add('visitedNoAnimation');
         elem.classList.remove('unvisited');
         visitedNodes.push(elem);
         return 'valid';
     } else if (elem.classList.contains('endNode')){
         console.log('goal is found');
-        elem.classList.add('visited');
+        isAnimated ? elem.classList.add('visited') : elem.classList.add('visitedNoAnimation');
         return 'goal';
     } else {
         return 'outofbounds';
@@ -287,8 +306,18 @@ const makeGrid = () => {
       isAnimated = false;
     }
 
+    const AStar = () => {
+
+    }
+
+    const DFS = () => {
+
+    }
+
 
 export{
     Grid,
-    BFS
+    BFS,
+    AStar,
+    DFS
 };
