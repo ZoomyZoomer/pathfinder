@@ -6,8 +6,6 @@ var gridLength = 70;
 var flexArray = [];
 var startNode = '5-16';
 var endNode = '20-20';
-var startx;
-var starty;
 var endx;
 var endy;
 
@@ -18,6 +16,8 @@ var isAnimated = true;
 let shortestPath = [];
 let visitedNodes = [];
 let blockedNodes = [];
+
+let programRun = 'none';
 
 
 
@@ -55,8 +55,6 @@ const makeGrid = () => {
         divArray = [];
     }
 
-    startx = startNode.substring(0,startNode.indexOf('-'));
-    starty = startNode.substring(startNode.indexOf('-') + 1);
     endx = endNode.substring(0,endNode.indexOf('-'));
     endy = endNode.substring(endNode.indexOf('-') + 1);
 
@@ -89,14 +87,13 @@ const makeGrid = () => {
         element.classList.add('unvisited');
     });
 
-    blockedNodes.map(element =>{
-      element.classList.remove('blocked');
-      element.classList.add('unvisited');
-    })
-
     if (buttonClicked) {
       isAnimated = true;
       document.getElementById('clear').classList.remove('pointerEventReset');
+        blockedNodes.map(element =>{
+        element.classList.remove('blocked');
+        element.classList.add('unvisited');
+      })
     }
     
   }
@@ -111,32 +108,39 @@ const makeGrid = () => {
           startNode = e.target.id;
           if (!isAnimated){
             clearTiles(false);
-            BFS();
+            if (programRun === 'BFS'){
+              BFS();
+            } else {
+              AStar();
+            }
           }
 
         } else if (endClicked){
           e.target.appendChild(document.getElementById("endNode"));
           endNode = e.target.id;
+          endx = endNode.substring(0,endNode.indexOf('-'));
+          endy = endNode.substring(endNode.indexOf('-') + 1);
           if (!isAnimated){
             clearTiles(false);
-            BFS();
+            if (programRun === 'BFS'){
+              BFS();
+            } else {
+              AStar();
+            }
           }
         }
-        startx = startNode.substring(0,startNode.indexOf('-'));
-        starty = startNode.substring(startNode.indexOf('-') + 1);
-        endx = endNode.substring(0,endNode.indexOf('-'));
-        endy = endNode.substring(endNode.indexOf('-') + 1);
       }
     }
     
   }
 
   async function BFS(){
-    console.log('u');
 
     shortestPath = [];
     visitedNodes = [];
     queue = [];
+
+    programRun = 'BFS';
   
     document.getElementById(startNode).classList.add('undraggable');
   
@@ -302,13 +306,25 @@ const makeGrid = () => {
           var direction = path[i];
           
           if (direction === 'north'){
-              td--;
-          } else if (direction === 'east'){
-              ld++;
+            td--;
           } else if (direction === 'south'){
-              td++;
+            td++;
+          } else if (direction === 'east'){
+            ld++;
           } else if (direction === 'west'){
-              ld--;
+            ld--;
+          } else if (direction === 'northEast'){
+            td--;
+            ld++;
+          } else if (direction === 'northWest'){
+            td--;
+            ld--;
+          } else if (direction === 'southEast'){
+            td++;
+            ld++;
+          } else {
+            td++;
+            ld--;
           }
   
           var elem = document.getElementById(parseInt(parseInt(startNode.substring(0, startNode.indexOf('-'))) + td) + "-" + parseInt(parseInt(startNode.substring(startNode.indexOf('-') + 1)) + ld));
@@ -362,7 +378,9 @@ const makeGrid = () => {
       queue = [];
       var closedQueue = [];
 
-      console.log(document.getElementById('startNode'));
+      programRun = 'AStar';
+
+      console.log(endx + " " + endy);
   
       document.getElementById(endNode).classList.add('endNode');
       document.getElementById(endNode).classList.remove('unvisited');
@@ -385,6 +403,7 @@ const makeGrid = () => {
           var newNode = checkDirectionAStar(queuedNode, 'north');
 
           if (newNode.status === 'goal'){
+            showPath(newNode.path);
             return newNode.path;
           }
 
@@ -393,6 +412,7 @@ const makeGrid = () => {
           var newNode = checkDirectionAStar(queuedNode, 'northEast');
 
           if (newNode.status === 'goal'){
+            showPath(newNode.path);
             return newNode.path;
           }
 
@@ -401,6 +421,7 @@ const makeGrid = () => {
           var newNode = checkDirectionAStar(queuedNode, 'east');
 
           if (newNode.status === 'goal'){
+            showPath(newNode.path);
             return newNode.path;
           }
 
@@ -409,6 +430,7 @@ const makeGrid = () => {
           var newNode = checkDirectionAStar(queuedNode, 'southEast');
 
           if (newNode.status === 'goal'){
+            showPath(newNode.path);
             return newNode.path;
           }
 
@@ -418,6 +440,7 @@ const makeGrid = () => {
           var newNode = checkDirectionAStar(queuedNode, 'south');
 
           if (newNode.status === 'goal'){
+            showPath(newNode.path);
             return newNode.path;
           }
 
@@ -425,9 +448,8 @@ const makeGrid = () => {
 
           var newNode = checkDirectionAStar(queuedNode, 'southWest');
 
-          console.log(newNode.status + " " + newNode.topDistance + '-' + newNode.leftDistance + ": " + newNode.fValue + "!!!!!" + newNode.gValue + ' ' + newNode.hValue);
-
           if (newNode.status === 'goal'){
+            showPath(newNode.path);
             return newNode.path;
           }
 
@@ -436,6 +458,7 @@ const makeGrid = () => {
           var newNode = checkDirectionAStar(queuedNode, 'west');
 
           if (newNode.status === 'goal'){
+            showPath(newNode.path);
             return newNode.path;
           }
 
@@ -444,6 +467,7 @@ const makeGrid = () => {
           var newNode = checkDirectionAStar(queuedNode, 'northWest');
 
           if (newNode.status === 'goal'){
+            showPath(newNode.path);
             return newNode.path;
           }
 
@@ -452,7 +476,6 @@ const makeGrid = () => {
           var bestNode = lowestFValue(closedQueue);
 
           closedQueue = [];
-          console.log(bestNode.status + " " + bestNode.topDistance + '-' + bestNode.leftDistance + ": " + bestNode.fValue + " "  + newNode.gValue + ' ' + newNode.hValue);
         
           queue.push(bestNode);
         }
@@ -531,7 +554,7 @@ const makeGrid = () => {
 
 
     const setHValue = (node) => {
-      return (Math.sqrt(Math.pow(node.leftDistance - endx, 2) + Math.pow(node.topDistance-endy, 2)));
+      return (Math.sqrt(Math.pow(node.leftDistance - endy, 2) + Math.pow(node.topDistance-endx, 2)));
     }
 
     const lowestFValue = (queue) => {
