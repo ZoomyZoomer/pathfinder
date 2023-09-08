@@ -6,6 +6,10 @@ var gridLength = 70;
 var flexArray = [];
 var startNode = '5-16';
 var endNode = '20-20';
+var startx;
+var starty;
+var endx;
+var endy;
 
 var startClicked = false;
 var endClicked = false;
@@ -22,6 +26,7 @@ const Grid = () => {
 
 
   makeGrid();
+
 
   return (
     <div className="gridGrid">
@@ -50,6 +55,10 @@ const makeGrid = () => {
         divArray = [];
     }
 
+    startx = startNode.substring(0,startNode.indexOf('-'));
+    starty = startNode.substring(startNode.indexOf('-') + 1);
+    endx = endNode.substring(0,endNode.indexOf('-'));
+    endy = endNode.substring(endNode.indexOf('-') + 1);
 
   } 
   
@@ -103,7 +112,6 @@ const makeGrid = () => {
           if (!isAnimated){
             clearTiles(false);
             BFS();
-            return;
           }
 
         } else if (endClicked){
@@ -112,10 +120,12 @@ const makeGrid = () => {
           if (!isAnimated){
             clearTiles(false);
             BFS();
-            return;
           }
         }
-
+        startx = startNode.substring(0,startNode.indexOf('-'));
+        starty = startNode.substring(startNode.indexOf('-') + 1);
+        endx = endNode.substring(0,endNode.indexOf('-'));
+        endy = endNode.substring(endNode.indexOf('-') + 1);
       }
     }
     
@@ -240,7 +250,7 @@ const makeGrid = () => {
   
     function setStatus(newNode){
   
-      if (newNode.topDistance < 0 || newNode.leftDistance < 0 || newNode.topDistance > gridHeight -1 || newNode.leftDistance > gridLength -1){
+      if (newNode.topDistance < 0 || newNode.leftDistance < 0 || newNode.topDistance > gridHeight || newNode.leftDistance > gridLength){
         return 'outOfBounds';
     }
   
@@ -341,8 +351,198 @@ const makeGrid = () => {
       isAnimated = false;
     }
 
-    const AStar = () => {
 
+
+
+
+
+    const AStar = async() => {
+      shortestPath = [];
+      visitedNodes = [];
+      queue = [];
+      var closedQueue = [];
+
+      console.log(document.getElementById('startNode'));
+  
+      document.getElementById(endNode).classList.add('endNode');
+      document.getElementById(endNode).classList.remove('unvisited');
+        
+          
+        var Node = {
+          topDistance: startNode.substring(0,startNode.indexOf('-')),
+          leftDistance: startNode.substring(startNode.indexOf('-') + 1),
+          status: 'start',
+          path: []
+        };
+    
+        var queue = [];
+        queue.push(Node);
+    
+        while (queue.length > 0){
+    
+          var queuedNode = queue.shift();
+    
+          var newNode = checkDirectionAStar(queuedNode, 'north');
+
+          if (newNode.status === 'goal'){
+            return newNode.path;
+          }
+
+          closedQueue.push(newNode);
+        
+          var newNode = checkDirectionAStar(queuedNode, 'northEast');
+
+          if (newNode.status === 'goal'){
+            return newNode.path;
+          }
+
+          closedQueue.push(newNode);
+    
+          var newNode = checkDirectionAStar(queuedNode, 'east');
+
+          if (newNode.status === 'goal'){
+            return newNode.path;
+          }
+
+          closedQueue.push(newNode);
+
+          var newNode = checkDirectionAStar(queuedNode, 'southEast');
+
+          if (newNode.status === 'goal'){
+            return newNode.path;
+          }
+
+
+          closedQueue.push(newNode);
+    
+          var newNode = checkDirectionAStar(queuedNode, 'south');
+
+          if (newNode.status === 'goal'){
+            return newNode.path;
+          }
+
+          closedQueue.push(newNode);
+
+          var newNode = checkDirectionAStar(queuedNode, 'southWest');
+
+          console.log(newNode.status + " " + newNode.topDistance + '-' + newNode.leftDistance + ": " + newNode.fValue + "!!!!!" + newNode.gValue + ' ' + newNode.hValue);
+
+          if (newNode.status === 'goal'){
+            return newNode.path;
+          }
+
+          closedQueue.push(newNode);
+    
+          var newNode = checkDirectionAStar(queuedNode, 'west');
+
+          if (newNode.status === 'goal'){
+            return newNode.path;
+          }
+
+          closedQueue.push(newNode);
+
+          var newNode = checkDirectionAStar(queuedNode, 'northWest');
+
+          if (newNode.status === 'goal'){
+            return newNode.path;
+          }
+
+          closedQueue.push(newNode);
+    
+          var bestNode = lowestFValue(closedQueue);
+
+          closedQueue = [];
+          console.log(bestNode.status + " " + bestNode.topDistance + '-' + bestNode.leftDistance + ": " + bestNode.fValue + " "  + newNode.gValue + ' ' + newNode.hValue);
+        
+          queue.push(bestNode);
+        }
+    
+        console.log("NO PATH FOUND");
+        return false;
+
+    }
+
+    const checkDirectionAStar = (Node, direction) => {
+      var td = Node.topDistance;
+      var ld = Node.leftDistance;
+      var isDiagonal = false;
+  
+      if (direction === 'north'){
+        td--;
+      } else if (direction === 'south'){
+        td++;
+      } else if (direction === 'east'){
+        ld++;
+      } else if (direction === 'west'){
+        ld--;
+      } else if (direction === 'northEast'){
+        td--;
+        ld++;
+        isDiagonal = true;
+      } else if (direction === 'northWest'){
+        td--;
+        ld--;
+        isDiagonal = true;
+      } else if (direction === 'southEast'){
+        td++;
+        ld++;
+        isDiagonal = true;
+      } else {
+        td++;
+        ld--;
+        isDiagonal = true;
+      }
+        
+      
+  
+      var tempPath = Node.path.slice();
+      tempPath.push(direction);
+  
+      var newNode = {
+        topDistance: td,
+        leftDistance: ld,
+        status: "unknown",
+        path: tempPath,
+        hValue: 100,
+        gValue: 100,
+        fValue: 100
+      };
+  
+      newNode.status = setStatus(newNode);
+
+      if (newNode.status != 'blocked' && newNode.status != 'outOfBounds'){
+        newNode.hValue = setHValue(newNode);
+
+        newNode.gValue = setGValue (isDiagonal);
+  
+        newNode.fValue = newNode.gValue + newNode.hValue;
+      }
+
+      return newNode;
+    }
+
+    const setGValue = (isDiagonal) => {
+      if (isDiagonal){
+        return 1.4;
+      } else {
+        return 1;
+      }
+    }
+
+
+    const setHValue = (node) => {
+      return (Math.sqrt(Math.pow(node.leftDistance - endx, 2) + Math.pow(node.topDistance-endy, 2)));
+    }
+
+    const lowestFValue = (queue) => {
+      var minF = queue[0];
+      for (var i = 1; i < queue.length; i++){
+        if (queue[i].fValue < minF.fValue){
+          minF = queue[i];
+        }
+      }
+
+      return minF;
     }
 
     const DFS = () => {
