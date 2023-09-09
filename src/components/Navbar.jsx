@@ -11,6 +11,9 @@ const Navbar = () => {
     setAlgoValue(e.target.id);
     document.getElementById('algoOptionsWrapper').classList.remove('notInvisible');
     document.getElementById('algo').classList.remove('dropdownActive');
+    var element = document.getElementById('algoOptionsWrapper');
+      element.classList.remove('notInvisible');
+      element.classList.remove('pointerEvent');
   }
 
   const algoDrop = (e) => {
@@ -21,7 +24,11 @@ const Navbar = () => {
       element.classList.add('pointerEvent');
     } else {
       e.target.classList.remove('dropdownActive');
-      document.getElementById('algoOptionsWrapper').classList.remove('notInvisible');
+      var element = document.getElementById('algoOptionsWrapper');
+      element.classList.remove('notInvisible');
+      element.classList.remove('pointerEvent');
+      
+
     }
 
     algoIsActive = !algoIsActive;

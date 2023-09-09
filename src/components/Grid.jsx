@@ -67,6 +67,7 @@ const makeGrid = () => {
   const setBlocked = (e) => {
     if (!(e.target.classList.contains("imageNode")) && !(e.target.classList.contains('visitedNoAnimation'))) {
       e.target.classList.add("blocked");
+      e.target.classList.remove("unvisited");
       blockedNodes.push(e.target);
     }
       
@@ -84,6 +85,7 @@ const makeGrid = () => {
     visitedNodes.map(element => {
         element.classList.remove('visited');
         element.classList.remove('visitedNoAnimation');
+        element.classList.remove('endNode');
         element.classList.add('unvisited');
     });
 
@@ -264,7 +266,9 @@ const makeGrid = () => {
         return 'blocked';
     } else if (elem.classList.contains('visited')){
         return 'visited';
-    } else if (elem.classList.contains('unvisited')){    
+    } else if (elem.classList.contains('visitedNoAnimation')){
+        return 'visited';
+    }else if (elem.classList.contains('unvisited')){    
         isAnimated ? elem.classList.add('visited') : elem.classList.add('visitedNoAnimation');
         elem.classList.remove('unvisited');
         visitedNodes.push(elem);
@@ -368,8 +372,7 @@ const makeGrid = () => {
     }
 
 
-
-
+    let nodedNodes = [];
 
 
     const AStar = async() => {
@@ -377,6 +380,8 @@ const makeGrid = () => {
       visitedNodes = [];
       queue = [];
       var closedQueue = [];
+      nodedNodes = [];
+      
 
       programRun = 'AStar';
 
@@ -399,6 +404,7 @@ const makeGrid = () => {
         while (queue.length > 0){
     
           var queuedNode = queue.shift();
+          nodedNodes.push(queuedNode);
     
           var newNode = checkDirectionAStar(queuedNode, 'north');
 
@@ -407,6 +413,9 @@ const makeGrid = () => {
             return newNode.path;
           }
 
+          if (isAnimated){
+            await sleep(20);
+          }
           closedQueue.push(newNode);
         
           var newNode = checkDirectionAStar(queuedNode, 'northEast');
@@ -415,7 +424,10 @@ const makeGrid = () => {
             showPath(newNode.path);
             return newNode.path;
           }
-
+          
+          if (isAnimated){
+            await sleep(20);
+          }
           closedQueue.push(newNode);
     
           var newNode = checkDirectionAStar(queuedNode, 'east');
@@ -425,6 +437,9 @@ const makeGrid = () => {
             return newNode.path;
           }
 
+          if (isAnimated){
+            await sleep(20);
+          }
           closedQueue.push(newNode);
 
           var newNode = checkDirectionAStar(queuedNode, 'southEast');
@@ -434,7 +449,9 @@ const makeGrid = () => {
             return newNode.path;
           }
 
-
+          if (isAnimated){
+            await sleep(20);
+          }
           closedQueue.push(newNode);
     
           var newNode = checkDirectionAStar(queuedNode, 'south');
@@ -444,6 +461,9 @@ const makeGrid = () => {
             return newNode.path;
           }
 
+          if (isAnimated){
+            await sleep(20);
+          }
           closedQueue.push(newNode);
 
           var newNode = checkDirectionAStar(queuedNode, 'southWest');
@@ -453,6 +473,9 @@ const makeGrid = () => {
             return newNode.path;
           }
 
+          if (isAnimated){
+            await sleep(20);
+          }
           closedQueue.push(newNode);
     
           var newNode = checkDirectionAStar(queuedNode, 'west');
@@ -462,6 +485,9 @@ const makeGrid = () => {
             return newNode.path;
           }
 
+          if (isAnimated){
+            await sleep(20);
+          }
           closedQueue.push(newNode);
 
           var newNode = checkDirectionAStar(queuedNode, 'northWest');
@@ -471,9 +497,13 @@ const makeGrid = () => {
             return newNode.path;
           }
 
+          if (isAnimated){
+            await sleep(20);
+          }
           closedQueue.push(newNode);
     
           var bestNode = lowestFValue(closedQueue);
+          console.log(bestNode);
 
           closedQueue = [];
         
@@ -532,14 +562,17 @@ const makeGrid = () => {
       };
   
       newNode.status = setStatus(newNode);
+      var isDoneAlready = false;
 
-      if (newNode.status != 'blocked' && newNode.status != 'outOfBounds'){
-        newNode.hValue = setHValue(newNode);
+      if (newNode.status !== 'blocked' && newNode.status !== 'outOfBounds'){
+          newNode.hValue = setHValue(newNode);
 
-        newNode.gValue = setGValue (isDiagonal);
+          newNode.gValue = setGValue (isDiagonal);
   
-        newNode.fValue = newNode.gValue + newNode.hValue;
-      }
+          newNode.fValue = newNode.gValue + newNode.hValue;
+
+      }   
+      
 
       return newNode;
     }
@@ -558,13 +591,31 @@ const makeGrid = () => {
     }
 
     const lowestFValue = (queue) => {
-      var minF = queue[0];
-      for (var i = 1; i < queue.length; i++){
-        if (queue[i].fValue < minF.fValue){
-          minF = queue[i];
+      var nono = false;
+      var minF = {
+        fValue: 1000
+      };
+
+      for (var i = 0; i < queue.length; i++){
+        if (queue[i].fValue <= minF.fValue){
+          if (queue[i].status !== 'outofbounds' && queue[i].status !== 'outOfBounds' && queue[i].status !== 'blocked'){
+            for (var k = 0; k < nodedNodes.length; k++){
+              if (nodedNodes[k].topDistance === queue[i].topDistance && nodedNodes[k].leftDistance === queue[i].leftDistance){
+                console.log('works');
+                nono = true;
+              }
+            }
+            if (!nono){
+              minF = queue[i];
+            } else {
+              nono = false;
+            }
+          }
+
         }
       }
-
+      console.log(nodedNodes);
+      console.log(queue);
       return minF;
     }
 
