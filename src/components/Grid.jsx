@@ -256,12 +256,12 @@ const makeGrid = () => {
   
     function setStatus(newNode){
   
-      if (newNode.topDistance < 0 || newNode.leftDistance < 0 || newNode.topDistance > gridHeight || newNode.leftDistance > gridLength){
+      if (newNode.topDistance < 0 || newNode.leftDistance < 0 || newNode.topDistance > gridHeight -1 || newNode.leftDistance > gridLength - 1){
         return 'outOfBounds';
     }
   
-  
     var elem = document.getElementById(newNode.topDistance + '-' + newNode.leftDistance);
+    console.log(elem);
     if (elem.classList.contains('blocked')){
         return 'blocked';
     } else if (elem.classList.contains('visited')){
