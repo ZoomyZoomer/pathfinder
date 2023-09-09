@@ -598,10 +598,9 @@ const makeGrid = () => {
 
       for (var i = 0; i < queue.length; i++){
         if (queue[i].fValue <= minF.fValue){
-          if (queue[i].status !== 'outofbounds' && queue[i].status !== 'outOfBounds' && queue[i].status !== 'blocked'){
+          if (queue[i].status !== 'outofbounds' && queue[i].status !== 'outOfBounds'){
             for (var k = 0; k < nodedNodes.length; k++){
               if (nodedNodes[k].topDistance === queue[i].topDistance && nodedNodes[k].leftDistance === queue[i].leftDistance){
-                console.log('works');
                 nono = true;
               }
             }
