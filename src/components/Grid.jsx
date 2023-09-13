@@ -386,6 +386,7 @@ const makeGrid = () => {
       programRun = 'AStar';
 
       console.log(endx + " " + endy);
+      document.getElementById(startNode).classList.add('undraggable');
   
       document.getElementById(endNode).classList.add('endNode');
       document.getElementById(endNode).classList.remove('unvisited');
