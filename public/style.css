@@ -382,6 +382,7 @@ animation-play-state: running;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-play-state: running;
+  background-color: rgba(178, 67, 255, 0.75);
   z-index: 4000;
 }
 

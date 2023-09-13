@@ -51,6 +51,7 @@ const makeGrid = () => {
               <div id={element} onClick={setBlocked} onMouseOver={dragImage} className="unvisited"></div>));
   
         var tempFlex = React.createElement("div", {className: "gridFlexBox"}, divElements);
+
         flexArray.push(tempFlex);
         divArray = [];
     }
@@ -619,19 +620,80 @@ const makeGrid = () => {
       return minF;
     }
 
-    const DFS = () => {
+    const DFS = async() => {
+
+      var path = [];
 
       var newNode = '';
 
+      document.getElementById(startNode).classList.add('undraggable');
+  
+      document.getElementById(endNode).classList.add('endNode');
+      document.getElementById(endNode).classList.remove('unvisited');
+        
+
       for (var i = startNode.substring(0,startNode.indexOf('-')); i >= 0; i--){
         var element = document.getElementById(i + '-' + startNode.substring(startNode.indexOf('-') + 1));
-        element.classList.add('visited');
+        if (!element.classList.contains('blocked')){
+          element.classList.add('visited');
+          element.classList.remove('unvisited');
+          path.push(element);
+        }
+        await sleep (20);
         newNode = element.id;
       }
 
       for (var k = newNode.substring(newNode.indexOf('-') + 1); k >= 0; k--){
         var element = document.getElementById(newNode.substring(0, newNode.indexOf('-')) + '-' + k);
-        element.classList.add('visited');
+        if (!element.classList.contains('blocked')){
+          element.classList.add('visited');
+          element.classList.remove('unvisited');
+          path.push(element);
+        }
+        await sleep (20);
+      }
+
+
+      for (var i = 0; i < gridLength; i++){
+        for (var k = 0; k < gridHeight; k++){
+          var element = document.getElementById(k + '-' + i);
+          if (!element.classList.contains('blocked')){
+            element.classList.add('visited');
+            element.classList.remove('unvisited');
+            path.push(element);
+          }
+          await sleep (20);
+          if (element.classList.contains('endNode')){
+            showPathDFS(path);
+            return;
+          }
+        }
+      }
+
+
+    }
+
+    const showPathDFS = async(path) => {
+
+      for (var i = 0; i < path.length; i++){
+        path[i].classList.remove('visited');
+        path[i].classList.add('shortestPath');
+        await sleep(20);
+      }
+
+      document.getElementById(endNode).classList.remove('visited');
+      document.getElementById(endNode).classList.remove('endNode');
+      document.getElementById(endNode).classList.add('goal');
+    }
+
+    const mazeGenerator = () => {
+      var blockArray = [];
+
+      for (var i = 0; i < 3; i++){
+        for (var k = 0; k < 3; k++){
+          var arr = [i + '-' + k];
+          blockArray.push(arr);
+        }
       }
     }
 
@@ -641,5 +703,6 @@ export{
     BFS,
     AStar,
     DFS,
-    clearTiles
+    clearTiles,
+    mazeGenerator
 };
