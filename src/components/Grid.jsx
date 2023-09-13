@@ -620,6 +620,18 @@ const makeGrid = () => {
 
     const DFS = () => {
 
+      var newNode = '';
+
+      for (var i = startNode.substring(0,startNode.indexOf('-')); i >= 0; i--){
+        var element = document.getElementById(i + '-' + startNode.substring(startNode.indexOf('-') + 1));
+        element.classList.add('visited');
+        newNode = element.id;
+      }
+
+      for (var k = newNode.substring(newNode.indexOf('-') + 1); k >= 0; k--){
+        var element = document.getElementById(newNode.substring(0, newNode.indexOf('-')) + '-' + k);
+        element.classList.add('visited');
+      }
     }
 
 
