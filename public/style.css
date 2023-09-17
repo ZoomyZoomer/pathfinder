@@ -1,5 +1,6 @@
 html{
   height: 100%;
+  position: relative;
 }
 
 body{
@@ -8,6 +9,25 @@ body{
   font-family: Inter, sans-serif;
 }
 
+
+.tutorial--container{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 600px;
+  width: 800px;
+  border-style: solid;
+  border-color: #45eecc;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1000000000;
+  background-color: white;
+}
 
 .nav--mainGrid{
   display: grid;

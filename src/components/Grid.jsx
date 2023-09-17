@@ -29,9 +29,9 @@ const Grid = () => {
 
 
   return (
-    <div className="gridGrid">
+    <main className="gridGrid">
       {flexArray}
-    </div>
+    </main>
   )
 }
 
@@ -70,6 +70,7 @@ const makeGrid = () => {
       e.target.classList.add("blocked");
       e.target.classList.remove("unvisited");
       blockedNodes.push(e.target);
+      document.getElementById('clear').classList.add('pointerEventReset');
     }
       
   }
@@ -686,16 +687,6 @@ const makeGrid = () => {
       document.getElementById(endNode).classList.add('goal');
     }
 
-    const mazeGenerator = () => {
-      var blockArray = [];
-
-      for (var i = 0; i < 3; i++){
-        for (var k = 0; k < 3; k++){
-          var arr = [i + '-' + k];
-          blockArray.push(arr);
-        }
-      }
-    }
 
 
 export{
@@ -703,6 +694,6 @@ export{
     BFS,
     AStar,
     DFS,
-    clearTiles,
-    mazeGenerator
+    clearTiles
+
 };
