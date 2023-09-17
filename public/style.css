@@ -10,12 +10,62 @@ body{
 }
 
 .tutorial--nextButton {
+  font-size: 16px;
+  border-style: solid;
+  border-width: 2px;
   background-color: #45eecc;
   border-color: #2ec579;
-  color: white;
-  border-radius: 20px;
+  color: #34495e;
+  padding: 15px;
+  padding-right: 30px;
+  padding-left: 30px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.tutorial--exitButton {
+  font-size: 16px;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
+  background-color: #45eecc;
+  border-color: #2ec579;
+  color: #34495e;
+  padding: 15px;
+  padding-right: 30px;
+  padding-left: 30px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+  position: absolute;
+  left: 20px;
+  bottom: 20px; 
+}
+
+.tutorial--nextButton:hover {
+  background-color: #45eecc;
+  color: #34495e;
+  border-color: #34495e;
+  border-radius: 10px;
+  background-position: center;
+  background-repeat: repeat;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-name: visualizeButtonHover;
+}
+
+.demoVideo {
+  margin-top: 30px;
 }
 
 .tutorial--container{
@@ -25,6 +75,7 @@ body{
   top: 0;
   bottom: 0;
   margin: auto;
+  margin-top: 100px;
   height: 600px;
   width: 800px;
   border-style: solid;
@@ -89,7 +140,6 @@ body{
   0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   background-position: center;
   background-repeat: repeat;
-  animation-name: goal;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-delay: 0;
@@ -434,7 +484,7 @@ animation-play-state: running;
 }
 
 .fyiMargin {
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 }
 
 
