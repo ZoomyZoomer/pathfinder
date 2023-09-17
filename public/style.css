@@ -9,6 +9,14 @@ body{
   font-family: Inter, sans-serif;
 }
 
+.tutorial--nextButton {
+  background-color: #45eecc;
+  border-color: #2ec579;
+  color: white;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+}
 
 .tutorial--container{
   position: absolute;
@@ -425,6 +433,8 @@ animation-play-state: running;
     }
 }
 
-
+.fyiMargin {
+  margin-bottom: 100px;
+}
 
 
