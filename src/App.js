@@ -6,9 +6,13 @@ import Tutorial from './components/Tutorial'
 const App = () => {
   return (
     <div>
+      
+      <div id='dimWrapper' className='dim'>
+        <Navbar />
+        <Grid />
+      </div>
       <Tutorial />
-      <Navbar />
-      <Grid />
+      
     </div>
   )
 }

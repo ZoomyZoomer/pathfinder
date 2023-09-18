@@ -38,8 +38,8 @@ const Navbar = () => {
   
 
   return (
-    <div>
-        <nav className="nav--mainGrid">
+    <div id='navWrapper' className='noEvent'>
+        <nav id='navMain' className="nav--mainGrid">
             <section className="nav--leftFlex">
                 <h1 className="title">PATHFINDER</h1>
             </section>

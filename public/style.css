@@ -28,6 +28,14 @@ body{
   bottom: 20px;
 }
 
+.dim {
+  opacity: 0.3;
+}
+
+.spacing {
+  margin-top: 60px;
+}
+
 .tutorial--exitButton {
   font-size: 16px;
   border-style: solid;
@@ -45,6 +53,20 @@ body{
   position: absolute;
   left: 20px;
   bottom: 20px; 
+  
+}
+
+.tutorial--exitButton:hover {
+  background-position: center;
+  background-repeat: repeat;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-name: visualizeButtonHover;
 }
 
 .tutorial--nextButton:hover {
@@ -64,8 +86,21 @@ body{
   animation-name: visualizeButtonHover;
 }
 
+.videoContainer {
+  width: 300px;
+  height: 250px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
 .demoVideo {
-  margin-top: 30px;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 80px;
 }
 
 .tutorial--container{
@@ -86,7 +121,13 @@ body{
   text-align: center;
   z-index: 1000000000;
   background-color: white;
+  opacity: 1;
 }
+
+.dim {
+  opacity: 0.3;
+}
+
 
 .nav--mainGrid{
   display: grid;
@@ -433,6 +474,10 @@ animation-play-state: running;
 .pointerEvent {
   pointer-events: all;
   cursor: pointer;
+}
+
+.noEvent {
+  pointer-events: none;
 }
 
 .pointerEventReset{

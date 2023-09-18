@@ -29,9 +29,11 @@ const Grid = () => {
 
 
   return (
-    <main className="gridGrid">
-      {flexArray}
-    </main>
+    <div id='gridWrapper' className='noEvent'>
+      <main id='mainGrid' className="gridGrid">
+        {flexArray}
+      </main>
+    </div>
   )
 }
 
@@ -58,6 +60,7 @@ const makeGrid = () => {
 
     endx = endNode.substring(0,endNode.indexOf('-'));
     endy = endNode.substring(endNode.indexOf('-') + 1);
+    
 
   } 
   
