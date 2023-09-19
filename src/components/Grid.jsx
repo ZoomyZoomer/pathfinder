@@ -81,8 +81,10 @@ const makeGrid = () => {
   const clearTiles = (buttonClicked) => {
     shortestPath.map(element =>{ 
         element.classList.remove('shortestPathStatic');
+        element.classList.remove('shortestPath');
         element.classList.remove('endNode');
         element.classList.remove('visitedNoAnimation');
+        element.classList.remove('visited');
         element.classList.remove('goal');
         element.classList.add('unvisited')
     });
@@ -117,8 +119,10 @@ const makeGrid = () => {
             clearTiles(false);
             if (programRun === 'BFS'){
               BFS();
-            } else {
+            } else if (programRun == 'AStar'){
               AStar();
+            } else {
+              DFS();
             }
           }
 
@@ -131,8 +135,10 @@ const makeGrid = () => {
             clearTiles(false);
             if (programRun === 'BFS'){
               BFS();
-            } else {
+            } else if (programRun === 'AStar') {
               AStar();
+            } else {
+              DFS();
             }
           }
         }
@@ -626,7 +632,9 @@ const makeGrid = () => {
 
     const DFS = async() => {
 
-      var path = [];
+      
+
+        shortestPath = [];
 
       var newNode = '';
 
@@ -639,22 +647,23 @@ const makeGrid = () => {
       for (var i = startNode.substring(0,startNode.indexOf('-')); i >= 0; i--){
         var element = document.getElementById(i + '-' + startNode.substring(startNode.indexOf('-') + 1));
         if (!element.classList.contains('blocked')){
-          element.classList.add('visited');
+          isAnimated ? element.classList.add('visited') : element.classList.add('visitedNoAnimation');
           element.classList.remove('unvisited');
-          path.push(element);
+          shortestPath.push(element);
         }
-        await sleep (20);
+        if (isAnimated) await sleep (20);
+
         newNode = element.id;
       }
 
       for (var k = newNode.substring(newNode.indexOf('-') + 1); k >= 0; k--){
         var element = document.getElementById(newNode.substring(0, newNode.indexOf('-')) + '-' + k);
         if (!element.classList.contains('blocked')){
-          element.classList.add('visited');
+          isAnimated ? element.classList.add('visited') : element.classList.add('visitedNoAnimation');
           element.classList.remove('unvisited');
-          path.push(element);
+          shortestPath.push(element);
         }
-        await sleep (20);
+        if (isAnimated) await sleep (20);
       }
 
 
@@ -662,13 +671,13 @@ const makeGrid = () => {
         for (var k = 0; k < gridHeight; k++){
           var element = document.getElementById(k + '-' + i);
           if (!element.classList.contains('blocked')){
-            element.classList.add('visited');
+            isAnimated ? element.classList.add('visited') : element.classList.add('visitedNoAnimation');
             element.classList.remove('unvisited');
-            path.push(element);
+            shortestPath.push(element);
           }
-          await sleep (20);
+          if (isAnimated) await sleep (20);
           if (element.classList.contains('endNode')){
-            showPathDFS(path);
+            showPathDFS(shortestPath);
             return;
           }
         }
@@ -680,14 +689,18 @@ const makeGrid = () => {
     const showPathDFS = async(path) => {
 
       for (var i = 0; i < path.length; i++){
-        path[i].classList.remove('visited');
-        path[i].classList.add('shortestPath');
-        await sleep(20);
+        isAnimated ? path[i].classList.remove('visited') : path[i].classList.remove('visitedNoAnimation');
+        isAnimated ? path[i].classList.add('shortestPath') : path[i].classList.add('shortestPathStatic');
+        if (isAnimated) await sleep (20);
       }
 
       document.getElementById(endNode).classList.remove('visited');
+      document.getElementById(endNode).classList.remove('visitedNoAnimation');
       document.getElementById(endNode).classList.remove('endNode');
       document.getElementById(endNode).classList.add('goal');
+      document.getElementById(startNode).classList.remove('undraggable');
+      document.getElementById('clear').classList.add('pointerEventReset');
+      isAnimated = false;
     }
 
 
