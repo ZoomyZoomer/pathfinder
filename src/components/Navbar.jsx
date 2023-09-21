@@ -50,12 +50,12 @@ const Navbar = () => {
                 <div id='algoOptionsWrapper' className="algoOptionsWrapper">
                   <button id="Breadth First Search" className="algoOptions" onClick={handleChange}> Breadth First Search </button>
                   <button id="Depth First Search" className="algoOptions" onClick={handleChange}> Depth First Search </button>
-                  <button id="AStar" className="algoOptions" onClick={handleChange}> AStar </button>
+                  <button id="A*" className="algoOptions" onClick={handleChange}> A* </button>
                 </div>
              </div>
               <div className='visualizeButtonHolder'>
               <button className="visualizeButton" onClick={algoValue === 'Breadth First Search' ? BFS : 
-                algoValue === 'AStar' ? AStar :
+                algoValue === 'A*' ? AStar :
                 algoValue === 'Depth First Search' ? DFS : ''
                 }>Pathfind With {algoValue} {algoValue === '' ? '...' : '!' }</button>
               </div>
