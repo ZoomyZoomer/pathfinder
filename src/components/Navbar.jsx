@@ -56,7 +56,7 @@ const Navbar = () => {
               <div className='visualizeButtonHolder'>
               <button className="visualizeButton" onClick={algoValue === 'Breadth First Search' ? BFS : 
                 algoValue === 'AStar' ? AStar :
-                 DFS
+                algoValue === 'Depth First Search' ? DFS : ''
                 }>Pathfind With {algoValue} {algoValue === '' ? '...' : '!' }</button>
               </div>
             </section>
