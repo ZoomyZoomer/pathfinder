@@ -222,9 +222,6 @@ body{
   object-fit: contain;
 }
 
-.unvisited {
-  z-index: 40000;
-}
 
 .blocked {
   background-color: rgb(200, 216, 248);
