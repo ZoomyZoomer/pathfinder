@@ -80,6 +80,8 @@ const makeGrid = () => {
 
   const clearTiles = (buttonClicked) => {
 
+    isAnimated = true;
+
     if (programRun === 'BFS' || programRun === 'DFS' || programRun === "AStar"){
       return;
     }
@@ -102,7 +104,6 @@ const makeGrid = () => {
     });
 
     if (buttonClicked) {
-      isAnimated = true;
       document.getElementById('clear').classList.remove('pointerEventReset');
         blockedNodes.map(element =>{
         element.classList.remove('blocked');
