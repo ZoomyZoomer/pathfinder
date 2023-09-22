@@ -389,6 +389,7 @@ const makeGrid = () => {
       document.getElementById('clear').classList.add('notInvisible');
       document.getElementById('clear').classList.add('pointerEventReset');
       isAnimated = false;
+      programRun = 'none';
     }
 
 
@@ -431,7 +432,6 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
-            programRun = 'none';
             return newNode.path;
           }
 
@@ -444,7 +444,6 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
-            programRun = 'none';
             return newNode.path;
           }
           
@@ -457,7 +456,6 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
-            programRun = 'none';
             return newNode.path;
           }
 
@@ -470,7 +468,6 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
-            programRun = 'none';
             return newNode.path;
           }
 
@@ -483,7 +480,6 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
-            programRun = 'none';
             return newNode.path;
           }
 
@@ -496,7 +492,6 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
-            programRun = 'none';
             return newNode.path;
           }
 
@@ -509,7 +504,6 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
-            programRun = 'none';
             return newNode.path;
           }
 
@@ -522,7 +516,6 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
-            programRun = 'none';
             return newNode.path;
           }
 
@@ -696,7 +689,6 @@ const makeGrid = () => {
           if (isAnimated) await sleep (20);
           if (element.classList.contains('endNode')){
             showPathDFS(shortestPath);
-            programRun = 'none';
             return;
           }
         }
@@ -720,6 +712,7 @@ const makeGrid = () => {
       document.getElementById(startNode).classList.remove('undraggable');
       document.getElementById('clear').classList.add('pointerEventReset');
       isAnimated = false;
+      programRun = 'none';
     }
 
 
