@@ -81,10 +81,6 @@ const makeGrid = () => {
   const clearTiles = (buttonClicked) => {
 
     isAnimated = true;
-
-    if (programRun === 'BFS' || programRun === 'DFS' || programRun === "AStar"){
-      return;
-    }
     
     shortestPath.map(element =>{ 
         element.classList.remove('shortestPathStatic');
