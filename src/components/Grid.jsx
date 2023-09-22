@@ -79,6 +79,8 @@ const makeGrid = () => {
   }
 
   const clearTiles = (buttonClicked) => {
+
+    if (!isAnimated){
     shortestPath.map(element =>{ 
         element.classList.remove('shortestPathStatic');
         element.classList.remove('shortestPath');
@@ -104,6 +106,7 @@ const makeGrid = () => {
         element.classList.add('unvisited');
       })
     }
+  }
     
   }
 
