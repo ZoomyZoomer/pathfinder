@@ -118,14 +118,15 @@ const makeGrid = () => {
           e.target.appendChild(document.getElementById("startNode"));
           startNode = e.target.id;
           if (!isAnimated){
+            clearTiles(false);
             if (programRun === 'BFS'){
-              clearTiles(false);
+              
               BFS();
             } else if (programRun === 'AStar'){
-              clearTiles(false);
+              
               AStar();
             } else if (programRun === 'DFS'){
-              clearTiles(false);
+
               DFS();
             }
           }
@@ -136,15 +137,16 @@ const makeGrid = () => {
           endx = endNode.substring(0,endNode.indexOf('-'));
           endy = endNode.substring(endNode.indexOf('-') + 1);
           if (!isAnimated){
+            clearTiles(false);
             
             if (programRun === 'BFS'){
-              clearTiles(false);
+
               BFS();
             } else if (programRun === 'AStar') {
-              clearTiles(false);
+
               AStar();
             } else if (programRun === 'DFS'){
-              clearTiles(false);
+  
               DFS();
             }
           }
@@ -191,7 +193,7 @@ const makeGrid = () => {
         if (newNode.status === 'goal'){
           showPath(newNode.path);
           document.getElementById('startNode').classList.remove('undraggable');
-          programRun = 'none';
+    
           return newNode.path;
         } else if (newNode.status === 'valid'){
           if (isAnimated){
@@ -204,7 +206,7 @@ const makeGrid = () => {
         if (newNode.status === 'goal'){
           showPath(newNode.path);
           document.getElementById('startNode').classList.remove('undraggable');
-          programRun = 'none';
+   
           return newNode.path;
         } else if (newNode.status === 'valid'){
           if (isAnimated){
@@ -217,7 +219,7 @@ const makeGrid = () => {
         if (newNode.status === 'goal'){
           showPath(newNode.path);
           document.getElementById('startNode').classList.remove('undraggable');
-          programRun = 'none';
+
           return newNode.path;
         } else if (newNode.status === 'valid'){
           if (isAnimated){
@@ -230,7 +232,7 @@ const makeGrid = () => {
         if (newNode.status === 'goal'){
           showPath(newNode.path);
           document.getElementById('startNode').classList.remove('undraggable');
-          programRun = 'none';
+
           return newNode.path;
         } else if (newNode.status === 'valid'){
           if (isAnimated){
@@ -391,7 +393,7 @@ const makeGrid = () => {
       document.getElementById('clear').classList.add('notInvisible');
       document.getElementById('clear').classList.add('pointerEventReset');
       isAnimated = false;
-      programRun = 'none';
+ 
     }
 
 
@@ -714,7 +716,7 @@ const makeGrid = () => {
       document.getElementById(startNode).classList.remove('undraggable');
       document.getElementById('clear').classList.add('pointerEventReset');
       isAnimated = false;
-      programRun = 'none';
+ 
     }
 
 
