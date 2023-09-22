@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/pathfinder/static/js/main.b463ac1c.js",
+    "main.js": "/pathfinder/static/js/main.c749faf9.js",
     "static/media/demo2.mp4": "/pathfinder/static/media/demo2.e3e67921d4ced43d41cb.mp4",
     "static/media/demo3.mp4": "/pathfinder/static/media/demo3.f2186a8aee4801031b28.mp4",
     "static/media/demo1.mp4": "/pathfinder/static/media/demo1.f9982b9cecbd4b26ad13.mp4",
     "static/media/demo4.mp4": "/pathfinder/static/media/demo4.7c105f4b2e08628a4b67.mp4",
     "index.html": "/pathfinder/index.html",
-    "main.b463ac1c.js.map": "/pathfinder/static/js/main.b463ac1c.js.map"
+    "main.c749faf9.js.map": "/pathfinder/static/js/main.c749faf9.js.map"
   },
   "entrypoints": [
-    "static/js/main.b463ac1c.js"
+    "static/js/main.c749faf9.js"
   ]
 }
