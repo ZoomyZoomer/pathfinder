@@ -80,7 +80,10 @@ const makeGrid = () => {
 
   const clearTiles = (buttonClicked) => {
 
-    if (!isAnimated){
+    if (programRun === 'BFS' || programRun === 'DFS' || programRun === "AStar"){
+      return;
+    }
+    
     shortestPath.map(element =>{ 
         element.classList.remove('shortestPathStatic');
         element.classList.remove('shortestPath');
@@ -106,7 +109,6 @@ const makeGrid = () => {
         element.classList.add('unvisited');
       })
     }
-  }
     
   }
 
@@ -122,9 +124,9 @@ const makeGrid = () => {
             clearTiles(false);
             if (programRun === 'BFS'){
               BFS();
-            } else if (programRun == 'AStar'){
+            } else if (programRun === 'AStar'){
               AStar();
-            } else {
+            } else if (programRun === 'DFS'){
               DFS();
             }
           }
@@ -187,6 +189,7 @@ const makeGrid = () => {
         if (newNode.status === 'goal'){
           showPath(newNode.path);
           document.getElementById('startNode').classList.remove('undraggable');
+          programRun = 'none';
           return newNode.path;
         } else if (newNode.status === 'valid'){
           if (isAnimated){
@@ -199,6 +202,7 @@ const makeGrid = () => {
         if (newNode.status === 'goal'){
           showPath(newNode.path);
           document.getElementById('startNode').classList.remove('undraggable');
+          programRun = 'none';
           return newNode.path;
         } else if (newNode.status === 'valid'){
           if (isAnimated){
@@ -211,6 +215,7 @@ const makeGrid = () => {
         if (newNode.status === 'goal'){
           showPath(newNode.path);
           document.getElementById('startNode').classList.remove('undraggable');
+          programRun = 'none';
           return newNode.path;
         } else if (newNode.status === 'valid'){
           if (isAnimated){
@@ -223,6 +228,7 @@ const makeGrid = () => {
         if (newNode.status === 'goal'){
           showPath(newNode.path);
           document.getElementById('startNode').classList.remove('undraggable');
+          programRun = 'none';
           return newNode.path;
         } else if (newNode.status === 'valid'){
           if (isAnimated){
@@ -425,6 +431,7 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
+            programRun = 'none';
             return newNode.path;
           }
 
@@ -437,6 +444,7 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
+            programRun = 'none';
             return newNode.path;
           }
           
@@ -449,6 +457,7 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
+            programRun = 'none';
             return newNode.path;
           }
 
@@ -461,6 +470,7 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
+            programRun = 'none';
             return newNode.path;
           }
 
@@ -473,6 +483,7 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
+            programRun = 'none';
             return newNode.path;
           }
 
@@ -485,6 +496,7 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
+            programRun = 'none';
             return newNode.path;
           }
 
@@ -497,6 +509,7 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
+            programRun = 'none';
             return newNode.path;
           }
 
@@ -509,6 +522,7 @@ const makeGrid = () => {
 
           if (newNode.status === 'goal'){
             showPath(newNode.path);
+            programRun = 'none';
             return newNode.path;
           }
 
@@ -638,6 +652,7 @@ const makeGrid = () => {
       
 
         shortestPath = [];
+        programRun = 'DFS';
 
       var newNode = '';
 
@@ -681,6 +696,7 @@ const makeGrid = () => {
           if (isAnimated) await sleep (20);
           if (element.classList.contains('endNode')){
             showPathDFS(shortestPath);
+            programRun = 'none';
             return;
           }
         }
