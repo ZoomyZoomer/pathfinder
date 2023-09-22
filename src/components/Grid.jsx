@@ -143,7 +143,7 @@ const makeGrid = () => {
               BFS();
             } else if (programRun === 'AStar') {
               AStar();
-            } else {
+            } else if (programRun === 'DFS'){
               DFS();
             }
           }
