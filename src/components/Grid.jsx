@@ -122,12 +122,14 @@ const makeGrid = () => {
           e.target.appendChild(document.getElementById("startNode"));
           startNode = e.target.id;
           if (!isAnimated){
-            clearTiles(false);
             if (programRun === 'BFS'){
+              clearTiles(false);
               BFS();
             } else if (programRun === 'AStar'){
+              clearTiles(false);
               AStar();
             } else if (programRun === 'DFS'){
+              clearTiles(false);
               DFS();
             }
           }
@@ -138,12 +140,15 @@ const makeGrid = () => {
           endx = endNode.substring(0,endNode.indexOf('-'));
           endy = endNode.substring(endNode.indexOf('-') + 1);
           if (!isAnimated){
-            clearTiles(false);
+            
             if (programRun === 'BFS'){
+              clearTiles(false);
               BFS();
             } else if (programRun === 'AStar') {
+              clearTiles(false);
               AStar();
             } else if (programRun === 'DFS'){
+              clearTiles(false);
               DFS();
             }
           }
