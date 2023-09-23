@@ -80,7 +80,7 @@ const makeGrid = () => {
 
   const clearTiles = (buttonClicked) => {
 
-    isAnimated = true;
+  
     
     shortestPath.map(element =>{ 
         element.classList.remove('shortestPathStatic');
@@ -100,6 +100,7 @@ const makeGrid = () => {
     });
 
     if (buttonClicked) {
+      isAnimated = true;
       document.getElementById('clear').classList.remove('pointerEventReset');
         blockedNodes.map(element =>{
         element.classList.remove('blocked');
